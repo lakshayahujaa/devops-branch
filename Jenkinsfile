@@ -1,36 +1,32 @@
 pipeline {
     agent any
+
     stages {
-        stage('Checkout') {
-            steps {
-                // This stage checks out your source code from the Git repository.
-                checkout([$class: 'GitSCM', branches: [[name: '*/master']], userRemoteConfigs: [[url: 'https://github.com/lakshayahujaa/devops-branch']]])
-            }
-        }
-        
         stage('Build') {
             steps {
-                // This stage simulates a build step. You should replace this with your actual build commands.
-                bat 'echo "Building..."'
+                sh 'echo "Building the project"'
             }
         }
-        
+
         stage('Test') {
             steps {
-                // This stage simulates a test step. You should replace this with your actual test commands.
-                bat 'echo "Testing..."'
+                sh 'echo "Running tests"'
+            }
+        }
+
+        stage('Deploy') {
+            steps {
+                sh 'echo "Deploying the project"'
             }
         }
     }
-    
+
     post {
         success {
-            // This block specifies what to do if the pipeline succeeds.
-            echo 'The pipeline has completed successfully.'
+            echo 'Pipeline succeeded!'
         }
         failure {
-            // This block specifies what to do if the pipeline fails.
-            echo 'The pipeline has failed.'
+            echo 'Pipeline failed!'
         }
     }
 }
